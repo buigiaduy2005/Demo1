@@ -1,0 +1,334 @@
+/* LeftSidebar — Synchro Design */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    height: calc(100vh - var(--header-height));
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    display: none;
+    flex-direction: column;
+    position: sticky;
+    top: var(--header-height);
+    left: 0;
+    padding: 24px 16px;
+    margin: 0;
+    overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+    min-width: 80px;
+    padding: 24px 8px;
+}
+
+@media (min-width: 1024px) {
+    .sidebar {
+        display: flex;
+    }
+}
+
+/* User Profile Section */
+.userProfileSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-left: 12px;
+}
+
+.userName {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-text-main);
+}
+
+.userEmail {
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.toggleCollapseBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.toggleCollapseBtn:hover {
+    color: var(--color-text-main);
+    background: var(--color-bg);
+}
+
+/* Create Task Button */
+.createTaskWrapper {
+    margin-bottom: 20px;
+}
+
+.createTaskBtn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-text-main); /* Usually black in light, white in dark if logic applies */
+    color: var(--color-surface);
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.createTaskBtn:hover {
+    opacity: 0.9;
+}
+
+/* Main Navigation */
+.nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-right: -8px; 
+    padding-right: 8px;
+}
+
+.navSectionScroll {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.sidebar.collapsed .navItem {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.navItem:hover {
+    background: var(--color-bg);
+    color: var(--color-text-main);
+}
+
+.navItem.active {
+    background: var(--color-bg);
+    color: var(--color-text-main);
+    font-weight: 600;
+}
+
+.navIcon {
+    font-size: 20px;
+}
+
+.iconWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.sidebar.collapsed .iconWrapper {
+    margin-right: 0;
+}
+
+.notificationBadgeOverlay {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ef4444; /* Premium red */
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid var(--color-surface);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.sidebar.collapsed .notificationBadgeOverlay {
+    top: -5px;
+    right: -5px;
+}
+
+.navLabel {
+    flex: 1;
+    white-space: nowrap;
+}
+
+.navBadge {
+    background: var(--color-bg);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+}
+
+/* Favourite Section */
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 12px 8px;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.toggleIcon {
+    transition: transform 0.3s ease;
+    margin-right: 4px;
+}
+
+.toggleIcon.rotated {
+    transform: rotate(180deg);
+}
+
+.favouriteList {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 500px;
+}
+
+.collapsedList {
+    max-height: 0;
+}
+
+.sectionHeader span {
+    display: flex;
+    align-items: center;
+}
+
+.favouriteItem {
+    padding: 8px 12px;
+    color: var(--color-text-muted);
+}
+
+.favouriteItem .navIcon {
+    font-size: 18px;
+}
+
+/* Footer (Help Center & Settings) */
+.sidebarFooter {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.settingsRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 12px;
+    margin-bottom: 16px;
+}
+
+.settingsItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.settingsLabel {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+.footerActions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.footerBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 12px;
+    transition: all 0.2s;
+    border-radius: 8px;
+}
+
+.footerBtn:hover {
+    color: var(--color-text-main);
+    background: var(--color-bg);
+}
+
+.logoutBtn {
+    color: #ef4444 !important;
+}
+
+.logoutBtn:hover {
+    background: #fef2f2 !important;
+}
+
+:global(.dark) .logoutBtn:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+}
+
+.sidebar.collapsed .footerBtn {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.sidebar.collapsed .settingsRow {
+    align-items: center;
+    padding: 0;
+}
+
+.sidebar.collapsed .settingsItem {
+    justify-content: center;
+    width: 100%;
+}
