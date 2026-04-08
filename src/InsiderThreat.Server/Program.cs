@@ -59,6 +59,7 @@ builder.Services.AddCors(options =>
             "http://150.95.104.244", "https://150.95.104.244",
             "http://192.168.203.1", "https://192.168.203.1", "http://192.168.203.1:5173",
             "http://192.168.203.142", "https://192.168.203.142", "http://192.168.203.142:5173",
+            "http://192.168.203.0/24", "https://192.168.203.0/24",
             "https://tuyen-thda.io.vn", "https://www.tuyen-thda.io.vn")
               .AllowAnyHeader()
               .AllowAnyMethod()
@@ -68,7 +69,7 @@ builder.Services.AddCors(options =>
 
 // ─── 4. CẤU HÌNH JWT AUTHENTICATION ────────────────────────────────────────
 var jwtSettings = builder.Configuration.GetSection("Jwt");
-var rawKey = jwtSettings["Key"] ?? "[JWT_SECRET_KEY_MIN_32_CHARS]";
+var rawKey = jwtSettings["Key"] ?? "InsiderThreatSystem_SuperSecretKey_2024_Security_Update_32Chars";
 var key = Encoding.UTF8.GetBytes(rawKey);
 
 builder.Services.AddAuthentication(options =>
