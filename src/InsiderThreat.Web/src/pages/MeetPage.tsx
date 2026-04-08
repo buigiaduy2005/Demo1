@@ -156,7 +156,7 @@ export default function MeetPage() {
             message.error(err?.message || t('meet.create_fail', 'Không thể tạo phòng'));
         }
         setLoading(false);
-    }, [createRoom, t]);
+    }, [createRoom, t, requireApproval]);
 
     const handleJoinRoom = useCallback(async () => {
         const code = inputCode.trim().toUpperCase();
