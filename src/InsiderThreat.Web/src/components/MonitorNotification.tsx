@@ -114,8 +114,8 @@ function MonitorNotification({ userRole }: MonitorNotificationProps) {
 
         // Start connection — kiểm tra cancelled để tránh StrictMode race condition
         const startConnection = async () => {
+            if (cancelled) return;
             try {
-                if (cancelled) return;
                 await connection.start();
                 if (cancelled) {
                     // StrictMode đã unmount trong khi đang connect → dọn dẹp
@@ -124,8 +124,10 @@ function MonitorNotification({ userRole }: MonitorNotificationProps) {
                 }
                 console.log('✅ SignalR MonitorNotification connected successfully');
                 connectionRef.current = connection;
-            } catch (err) {
-                if (!cancelled) {
+            } catch (err: any) {
+                // Lỗi "stopped during negotiation" thường xảy ra khi React unmount component 
+                // ngay khi vừa bắt đầu connect. Đây là race condition bình thường và không cần báo lỗi.
+                if (!cancelled && !err.toString().includes('stopped during negotiation')) {
                     console.error('MonitorNotification SignalR error:', err);
                 }
             }
